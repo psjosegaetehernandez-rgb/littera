@@ -12,8 +12,8 @@
         groq: {
             nombre: "Groq (gratis, rapido)",
             endpoint: "https://api.groq.com/openai/v1/chat/completions",
-            modelos: ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768"],
-            modeloDefecto: "llama-3.3-70b-versatile",
+            modelos: ["llama-3.1-8b-instant", "openai/gpt-oss-20b", "openai/gpt-oss-120b", "moonshotai/kimi-k2-instruct", "qwen/qwen3-32b", "meta-llama/llama-4-scout-17b-16e-instruct"],
+            modeloDefecto: "llama-3.1-8b-instant",
             urlKey: "https://console.groq.com/keys"
         },
         openai: {
@@ -577,3 +577,4 @@
 
     window.LitteraIa = IA;
 })();
+
