@@ -1,0 +1,582 @@
+﻿/* ============================================
+   LITTERA v5 - Gamificacion estilo Duolingo
+   XP, racha, niveles, camino, celebraciones
+   ============================================ */
+
+/* ---------- Header de la Biblioteca ---------- */
+.bib-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--e-4);
+    align-items: center;
+    padding: var(--e-4) var(--e-5);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-alt) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs);
+    margin-bottom: var(--e-5);
+    position: relative;
+    overflow: hidden;
+}
+.bib-header::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.bib-nivel-info {
+    display: flex;
+    align-items: center;
+    gap: var(--e-4);
+    position: relative;
+    z-index: 1;
+}
+
+.nivel-badge {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9A7A1E 0%, #B8860B 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(154, 122, 30, 0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+    font-family: var(--f-display);
+    position: relative;
+}
+.nivel-badge .nb-num {
+    font-size: 26px;
+    line-height: 1;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+}
+.nivel-badge .nb-label {
+    font-family: var(--f-mono);
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    opacity: 0.9;
+}
+.nivel-badge::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    opacity: 0.15;
+}
+
+.bib-xp-info { display: flex; flex-direction: column; gap: 6px; min-width: 240px; }
+.bib-xp-titulo {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--fg-strong);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+}
+.bib-xp-titulo strong { font-style: normal; font-weight: 600; font-family: var(--f-ui); font-size: 17px; }
+.bib-xp-barra {
+    height: 8px;
+    background: var(--bg-sunken);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+}
+.bib-xp-barra .xb-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #B8860B 0%, #D4A24C 100%);
+    border-radius: 999px;
+    transition: width var(--t-slow);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.bib-xp-texto {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ---------- Stats de racha, meta, precision ---------- */
+.bib-stats-mini {
+    display: flex;
+    gap: var(--e-3);
+    position: relative;
+    z-index: 1;
+}
+.stat-mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--e-3) var(--e-4);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    min-width: 78px;
+    text-align: center;
+}
+.stat-mini .sm-icono {
+    font-size: 22px;
+    line-height: 1;
+    filter: saturate(0.85);
+}
+.stat-mini .sm-valor {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--fg-strong);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+}
+.stat-mini .sm-label {
+    font-family: var(--f-mono);
+    font-size: 8.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+}
+
+/* ---------- Filtros por nivel ---------- */
+.nivel-filtros {
+    display: flex;
+    gap: 6px;
+    margin-bottom: var(--e-5);
+    flex-wrap: wrap;
+    padding-bottom: var(--e-4);
+    border-bottom: 1px solid var(--border);
+}
+
+.nivel-chip {
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all var(--t-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.nivel-chip:hover { background: var(--bg-card); color: var(--fg-strong); }
+.nivel-chip.activo {
+    background: var(--nivel-color, var(--accent));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.nivel-chip .nc-cuenta {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* ---------- Camino de niveles (ruta tipo Duolingo) ---------- */
+.ruta-niveles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-5);
+    position: relative;
+}
+
+.ruta-seccion {
+    position: relative;
+}
+
+.ruta-seccion-cabecera {
+    display: flex;
+    align-items: center;
+    gap: var(--e-4);
+    padding: var(--e-4) var(--e-5);
+    background: var(--bg-card);
+    border: 2px solid var(--ruta-color, var(--accent));
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-s);
+    margin-bottom: var(--e-4);
+    position: relative;
+}
+.ruta-seccion-cabecera::before {
+    content: "";
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background: var(--ruta-color, var(--accent));
+    border-radius: 0 3px 3px 0;
+}
+.ruta-seccion-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ruta-color, var(--accent));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    flex-shrink: 0;
+    font-weight: 400;
+}
+.ruta-seccion-texto { flex: 1; }
+.ruta-seccion-titulo {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--fg-strong);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin-bottom: 3px;
+}
+.ruta-seccion-sub {
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    line-height: 1.4;
+}
+.ruta-seccion-progreso {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+/* Nodos del camino */
+.ruta-nodos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--e-3);
+    padding-left: var(--e-4);
+    position: relative;
+}
+.ruta-nodos::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-strong);
+    opacity: 0.5;
+}
+
+.nodo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: var(--e-4) var(--e-3);
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all var(--t-med);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    min-height: 140px;
+    justify-content: center;
+}
+
+.nodo:hover:not(.bloqueado) {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-m);
+}
+
+.nodo.completado {
+    border-color: var(--nivel-color, var(--accent));
+    background: linear-gradient(180deg, color-mix(in srgb, var(--nivel-color) 8%, var(--bg-card)) 0%, var(--bg-card) 100%);
+}
+.nodo.completado::after {
+    content: "✓";
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--nivel-color, var(--accent));
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.nodo.disponible {
+    border-color: var(--nivel-color, var(--accent));
+    animation: pulso-nodo 2.4s ease-in-out infinite;
+}
+@keyframes pulso-nodo {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--nivel-color) 40%, transparent); }
+    50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--nivel-color) 0%, transparent); }
+}
+
+.nodo.bloqueado {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(0.6);
+}
+
+.nodo-icono {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--nivel-color, var(--accent));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--nivel-color) 30%, transparent);
+}
+.nodo-icono svg { width: 26px; height: 26px; stroke-width: 2; }
+
+.nodo-titulo {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-strong);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+}
+
+.nodo-xp {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.06em;
+    background: var(--bg-sunken);
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+/* ---------- Celebracion (modal) ---------- */
+.celebracion-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 9, 7, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--e-5);
+    animation: fadeIn var(--t-med) ease-out;
+}
+
+.celebracion {
+    background: var(--bg-card);
+    border-radius: var(--r-xl);
+    padding: var(--e-8) var(--e-7);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--sombra-xl);
+    border: 1px solid var(--border-strong);
+    animation: celebracion-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+.celebracion::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--nivel-color, var(--accent)) 0%, transparent 70%);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+@keyframes celebracion-in {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.celebracion-emoji {
+    font-size: 72px;
+    line-height: 1;
+    margin-bottom: var(--e-4);
+    animation: bounce 1.4s ease-in-out infinite;
+    display: inline-block;
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.celebracion-titulo {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 42px;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: var(--fg-strong);
+    margin-bottom: var(--e-3);
+    line-height: 1;
+}
+
+.celebracion-sub {
+    font-family: var(--f-cuerpo);
+    font-size: 15px;
+    color: var(--fg-muted);
+    line-height: 1.55;
+    margin-bottom: var(--e-5);
+}
+
+.celebracion-xp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    background: linear-gradient(135deg, #B8860B 0%, #D4A24C 100%);
+    color: #fff;
+    border-radius: 999px;
+    font-family: var(--f-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 14px rgba(184, 134, 11, 0.35);
+    margin-bottom: var(--e-5);
+}
+.celebracion-xp .cx-num {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+/* ---------- Meta diaria en Ritual y Biblioteca ---------- */
+.meta-diaria {
+    display: flex;
+    align-items: center;
+    gap: var(--e-4);
+    padding: var(--e-4) var(--e-5);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    margin-bottom: var(--e-5);
+}
+.meta-circulo {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+.meta-circulo svg {
+    width: 64px;
+    height: 64px;
+    transform: rotate(-90deg);
+}
+.meta-circulo .mc-bg {
+    fill: none;
+    stroke: var(--bg-sunken);
+    stroke-width: 6;
+}
+.meta-circulo .mc-fill {
+    fill: none;
+    stroke: #B8860B;
+    stroke-width: 6;
+    stroke-linecap: round;
+    transition: stroke-dashoffset var(--t-slow);
+}
+.meta-circulo .mc-texto {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--fg-strong);
+    letter-spacing: -0.02em;
+}
+.meta-info { flex: 1; }
+.meta-titulo {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--fg-strong);
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+}
+.meta-desc {
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+}
+
+/* ---------- Duolingo-style barra de XP flotante ---------- */
+.xp-flotante {
+    position: fixed;
+    bottom: var(--e-5);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--tinta-0);
+    color: var(--papel-0);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    box-shadow: var(--sombra-xl);
+    z-index: 250;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity var(--t-med), transform var(--t-med);
+    pointer-events: none;
+}
+.xp-flotante.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-8px);
+}
+.xp-flotante strong {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+@media (max-width: 700px) {
+    .bib-header { grid-template-columns: 1fr; }
+    .bib-stats-mini { justify-content: space-between; }
+    .nivel-badge { width: 54px; height: 54px; }
+    .nivel-badge .nb-num { font-size: 22px; }
+}

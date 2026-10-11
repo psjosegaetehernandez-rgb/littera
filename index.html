@@ -1,0 +1,935 @@
+﻿<!DOCTYPE html>
+<html lang="es" data-tema="dia">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Littera - Taller Literario Total</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/shell.css">
+<link rel="stylesheet" href="css/mundos.css">
+<link rel="stylesheet" href="css/taller.css">
+<link rel="stylesheet" href="css/imprenta.css">
+<link rel="stylesheet" href="css/laboratorio.css">
+<link rel="stylesheet" href="css/plaza.css">
+<link rel="stylesheet" href="css/personajes.css">
+<link rel="stylesheet" href="css/timeline.css">
+<link rel="stylesheet" href="css/lector.css">
+<link rel="stylesheet" href="css/duolingo.css">
+<link rel="stylesheet" href="css/novela-extra.css">
+<link rel="stylesheet" href="css/portadas.css">
+<link rel="stylesheet" href="css/aprendizaje.css">
+</head>
+<body>
+
+<div class="app" id="app">
+
+    <aside class="sidebar">
+        <div class="marca">
+            <div class="marca-mark">L</div>
+            <div class="marca-texto">Littera</div>
+        </div>
+
+        <nav class="nav" id="nav">
+            <button class="nav-item" data-mundo="escritorio" style="--mundo-color: #1B1712">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20z"/><path d="M9 21.5V13h6v8.5"/></svg></span>
+                <span class="texto-nav">Escritorio</span>
+                <span class="atajo">1</span>
+            </button>
+
+            <div class="nav-seccion">Crear</div>
+            <button class="nav-item" data-mundo="scriptorium" style="--mundo-color: #B5613F">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.4V19h8.6z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></span>
+                <span class="texto-nav">Scriptorium</span>
+                <span class="atajo">2</span>
+            </button>
+            <button class="nav-item" data-mundo="taller" style="--mundo-color: #8B2E2E">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+                <span class="texto-nav">Taller</span>
+                <span class="atajo">3</span>
+            </button>
+
+            <div class="nav-seccion">Estudiar</div>
+            <button class="nav-item" data-mundo="biblioteca" style="--mundo-color: #2A3F5F">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+                <span class="texto-nav">Biblioteca</span>
+                <span class="atajo">4</span>
+            </button>
+            <button class="nav-item" data-mundo="laboratorio" style="--mundo-color: #3D4D2E">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6l5 10a2 2 0 0 1-1.8 3H5.8A2 2 0 0 1 4 19L9 9z"/><line x1="5" y1="15" x2="19" y2="15"/></svg></span>
+                <span class="texto-nav">Laboratorio</span>
+                <span class="atajo">5</span>
+            </button>
+
+            <div class="nav-seccion">Producir</div>
+            <button class="nav-item" data-mundo="imprenta" style="--mundo-color: #9A7A1E">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><rect x="6" y="14" width="12" height="4" rx="1"/><path d="M9 14V8a3 3 0 0 1 3-3 3 3 0 0 1 3 3v6"/></svg></span>
+                <span class="texto-nav">Imprenta</span>
+                <span class="atajo">6</span>
+            </button>
+            <button class="nav-item" data-mundo="archivo" style="--mundo-color: #8A5A3A">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"/><line x1="10" y1="13" x2="14" y2="13"/></svg></span>
+                <span class="texto-nav">Archivo</span>
+                <span class="atajo">7</span>
+            </button>
+            <button class="nav-item" data-mundo="plaza" style="--mundo-color: #6B4F6E">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><line x1="9" y1="9" x2="9" y2="21"/><line x1="15" y1="9" x2="15" y2="21"/><line x1="12" y1="3" x2="12" y2="21"/></svg></span>
+                <span class="texto-nav">Plaza</span>
+                <span class="atajo">8</span>
+            </button>
+
+            <div class="nav-seccion">Habitar</div>
+            <button class="nav-item" data-mundo="ritual" style="--mundo-color: #6E2C3C">
+                <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 22h6v-6H9z"/><line x1="12" y1="16" x2="12" y2="10"/><path d="M12 10c0-3 3-4 3-7a3 3 0 0 0-6 0c0 3 3 4 3 7z"/></svg></span>
+                <span class="texto-nav">Ritual</span>
+                <span class="atajo">9</span>
+            </button>
+        </nav>
+
+        <div class="pie-sidebar">
+            <div class="tema-grupo" id="tema-grupo">
+                <button class="tema-btn activo" data-tema="dia">Dia</button>
+                <button class="tema-btn" data-tema="noche">Noche</button>
+                <button class="tema-btn" data-tema="sepia">Sepia</button>
+            </div>
+            <button class="btn-colapsar" id="btn-colapsar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                <span class="texto-colapsar">Colapsar</span>
+            </button>
+        </div>
+    </aside>
+
+    <div class="principal">
+
+        <header class="topbar">
+            <div class="migas" id="migas">
+                <span>Littera</span>
+                <span class="separador-miga">/</span>
+                <span class="actual" id="miga-actual">Escritorio</span>
+            </div>
+            <div class="acciones-topbar">
+                <button class="btn btn-fantasma" id="btn-exportar" title="Exportar todo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Exportar
+                </button>
+                <label class="btn btn-fantasma" for="input-importar" style="cursor:pointer;" title="Importar respaldo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 8 12 3 17 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Importar
+                </label>
+                <input type="file" id="input-importar" accept=".json" style="display:none;">
+            </div>
+        </header>
+
+        <main class="contenido">
+
+            <!-- ========== ESCRITORIO ========== -->
+            <section class="mundo activo" id="mundo-escritorio" style="--mundo-color: #1B1712">
+                <div class="hero">
+                    <div class="hero-kicker">Bienvenido, José Luis</div>
+                    <h1>Ocho mundos,<br><em>una sola obra.</em></h1>
+                    <p class="hero-desc">Soy Littera, tu taller literario completo. Aquí la observación, la lectura, la teoría y la producción editorial convergen en un solo flujo. Tu texto vive en este navegador: sin nube, sin cuentas, sin distracciones.</p>
+                    <div class="hero-ornamento">&amp;</div>
+                </div>
+
+                <div class="acciones-rapidas">
+                    <button class="accion-rapida" data-ir="scriptorium">
+                        <div class="ar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+                        <div class="ar-cuerpo">
+                            <div class="ar-titulo">Nueva nota</div>
+                            <div class="ar-desc">Ctrl + 2</div>
+                        </div>
+                    </button>
+                    <button class="accion-rapida" id="accion-nueva-obra">
+                        <div class="ar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+                        <div class="ar-cuerpo">
+                            <div class="ar-titulo">Nueva obra</div>
+                            <div class="ar-desc">Ctrl + 3</div>
+                        </div>
+                    </button>
+                    <button class="accion-rapida" data-ir="ritual">
+                        <div class="ar-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></div>
+                        <div class="ar-cuerpo">
+                            <div class="ar-titulo">Sesion de 25 min</div>
+                            <div class="ar-desc">Ctrl + 9</div>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="seccion">
+                    <div class="seccion-titulo">
+                        <h2>Explorar los ocho mundos</h2>
+                        <span class="contador">08 modulos</span>
+                    </div>
+                    <div class="rejilla">
+
+                        <div class="card mundo-card" data-ir="scriptorium" style="--mundo-color: #B5613F">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.4V19h8.6z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg></div>
+                                <span class="mc-numero">I</span>
+                            </div>
+                            <div class="mc-titulo">Scriptorium</div>
+                            <div class="mc-desc">El cuaderno infinito. Captura ideas, suenos y observaciones antes de que se pierdan.</div>
+                            <div class="mc-cta">Capturar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="taller" style="--mundo-color: #8B2E2E">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+                                <span class="mc-numero">II</span>
+                            </div>
+                            <div class="mc-titulo">Taller</div>
+                            <div class="mc-desc">Escribe en verso, en prosa o en poesia visual. Historias ilustradas con imagenes.</div>
+                            <div class="mc-cta">Escribir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="biblioteca" style="--mundo-color: #2A3F5F">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                                <span class="mc-numero">III</span>
+                            </div>
+                            <div class="mc-titulo">Biblioteca</div>
+                            <div class="mc-desc">Leer para escribir. Literatura universal, latinoamericana, teoria y linguistica.</div>
+                            <div class="mc-cta">Explorar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="laboratorio" style="--mundo-color: #3D4D2E">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v6l5 10a2 2 0 0 1-1.8 3H5.8A2 2 0 0 1 4 19L9 9z"/><line x1="5" y1="15" x2="19" y2="15"/></svg></div>
+                                <span class="mc-numero">IV</span>
+                            </div>
+                            <div class="mc-titulo">Laboratorio</div>
+                            <div class="mc-desc">Analisis textual, estilometria, riqueza lexica, mapas de personajes.</div>
+                            <div class="mc-cta">Analizar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="imprenta" style="--mundo-color: #9A7A1E">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><rect x="6" y="14" width="12" height="4" rx="1"/><path d="M9 14V8a3 3 0 0 1 3-3 3 3 0 0 1 3 3v6"/></svg></div>
+                                <span class="mc-numero">V</span>
+                            </div>
+                            <div class="mc-titulo">Imprenta</div>
+                            <div class="mc-desc">Tu texto como objeto. PDF listo para imprimir en carta, oficio, A4, A3 o A5.</div>
+                            <div class="mc-cta">Imprimir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="archivo" style="--mundo-color: #8A5A3A">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8"/><line x1="10" y1="13" x2="14" y2="13"/></svg></div>
+                                <span class="mc-numero">VI</span>
+                            </div>
+                            <div class="mc-titulo">Archivo</div>
+                            <div class="mc-desc">Tus obras guardadas. Reabre, edita, exporta. Todo persiste en el navegador.</div>
+                            <div class="mc-cta">Ver obras <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="plaza" style="--mundo-color: #6B4F6E">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><line x1="9" y1="9" x2="9" y2="21"/><line x1="15" y1="9" x2="15" y2="21"/></svg></div>
+                                <span class="mc-numero">VII</span>
+                            </div>
+                            <div class="mc-titulo">Plaza</div>
+                            <div class="mc-desc">Publicar, compartir, colaborar. Envios, concursos, comunidad de lectores.</div>
+                            <div class="mc-cta">Salir al mundo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                        <div class="card mundo-card" data-ir="ritual" style="--mundo-color: #6E2C3C">
+                            <div class="mc-top">
+                                <div class="mc-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 22h6v-6H9z"/><line x1="12" y1="16" x2="12" y2="10"/><path d="M12 10c0-3 3-4 3-7a3 3 0 0 0-6 0c0 3 3 4 3 7z"/></svg></div>
+                                <span class="mc-numero">VIII</span>
+                            </div>
+                            <div class="mc-titulo">Ritual</div>
+                            <div class="mc-desc">Un temporizador, una frase, silencio. El acto de escribir como ceremonia.</div>
+                            <div class="mc-cta">Iniciar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== SCRIPTORIUM ========== -->
+            <section class="mundo" id="mundo-scriptorium" style="--mundo-color: #B5613F">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo I</div>
+                    <h1>Scriptorium</h1>
+                    <p class="hero-desc">El cuaderno infinito. Captura todo lo que alimenta la escritura: ideas, suenos, frases oidas, observaciones del mundo. Cada nota se guarda sola y puedes editarla o borrarla cuando quieras.</p>
+                </div>
+
+                <div class="compositor">
+                    <textarea id="nota-input" placeholder="Escribe una nota. Una imagen, una frase, una idea suelta..."></textarea>
+                    <div class="compositor-pie">
+                        <div class="compositor-hint">
+                            <kbd>Ctrl</kbd>+<kbd>Enter</kbd>
+                            <span>para guardar</span>
+                        </div>
+                        <span class="compositor-contador" id="nota-contador">0 caracteres</span>
+                        <button class="btn btn-primario" id="nota-guardar" style="margin-left:auto;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                            Guardar nota
+                        </button>
+                    </div>
+                </div>
+
+                <div class="seccion-titulo">
+                    <h2>Notas capturadas</h2>
+                    <span class="contador" id="contador-notas">0 notas</span>
+                </div>
+                <div class="lista-notas" id="lista-notas"></div>
+            </section>
+
+                        <!-- ========== TALLER ========== -->
+            <section class="mundo" id="mundo-taller" style="--mundo-color: #8B2E2E">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo II · Creacion</div>
+                    <h1>Taller</h1>
+                    <p class="hero-desc">Once formas de escribir. Elige prosa, cuento, novela, historia ilustrada, verso, poesia visual, diario, cronica, aforismos, fanzine o revista. Cada una tiene su propio lienzo, su estructura y su voz. Autoguardado cada segundo y medio.</p>
+                </div>
+
+                <div class="taller-barra">
+                    <div class="modo-tabs-wrap">
+                        <div class="modo-tabs" id="modo-tabs">
+                            <button class="modo-btn activo" data-modo="prosa">Prosa</button>
+                            <button class="modo-btn" data-modo="cuento">Cuento</button>
+                            <button class="modo-btn" data-modo="novela">Novela</button>
+                            <button class="modo-btn" data-modo="historia">Historia</button>
+                            <span class="modo-sep"></span>
+                            <button class="modo-btn" data-modo="verso">Verso</button>
+                            <button class="modo-btn" data-modo="visual">Visual</button>
+                            <span class="modo-sep"></span>
+                            <button class="modo-btn" data-modo="diario">Diario</button>
+                            <button class="modo-btn" data-modo="cronica">Cronica</button>
+                            <button class="modo-btn" data-modo="aforismos">Aforismos</button>
+                            <span class="modo-sep"></span>
+                            <button class="modo-btn" data-modo="fanzine">Fanzine</button>
+                            <button class="modo-btn" data-modo="revista">Revista</button>
+                        </div>
+                    </div>
+                    <div class="taller-acciones">
+                        <button class="btn-icono btn btn-secundario" id="btn-des" title="Deshacer (Ctrl+Z)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6.36 2.64L3 13"/></svg>
+                        </button>
+                        <button class="btn-icono btn btn-secundario" id="btn-reh" title="Rehacer (Ctrl+Y)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6.36 2.64L21 13"/></svg>
+                        </button>
+                        <button class="btn-icono btn btn-secundario" id="btn-nueva-obra" title="Nueva obra">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PROSA -->
+                <div class="taller-panel activo" data-panel="prosa">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="prosa-titulo" placeholder="Sin titulo" spellcheck="true">
+                        <textarea class="lienzo" id="prosa-lienzo" placeholder="Empieza a escribir..." spellcheck="true" lang="es"></textarea>
+                    </div>
+                </div>
+
+                <!-- CUENTO -->
+                <div class="taller-panel" data-panel="cuento">
+                    <div class="taller-dos-columnas">
+                        <div class="col-principal">
+                            <div class="taller-wrap">
+                                <input type="text" class="titulo-obra" id="cuento-titulo" placeholder="Titulo del cuento" spellcheck="true">
+                                <textarea class="lienzo" id="cuento-lienzo" placeholder="Escribe el cuento..." spellcheck="true" lang="es"></textarea>
+                            </div>
+                        </div>
+                        <aside class="col-notas">
+                            <div class="panel-notas">
+                                <div class="panel-notas-titulo">Estructura narrativa</div>
+                                <div class="nota-campo">
+                                    <label>Situacion inicial</label>
+                                    <textarea class="nota-textarea" id="cuento-situacion" placeholder="¿Como empieza todo?"></textarea>
+                                </div>
+                                <div class="nota-campo">
+                                    <label>Conflicto</label>
+                                    <textarea class="nota-textarea" id="cuento-conflicto" placeholder="¿Que se rompe?"></textarea>
+                                </div>
+                                <div class="nota-campo">
+                                    <label>Desarrollo</label>
+                                    <textarea class="nota-textarea" id="cuento-desarrollo" placeholder="¿Que se complica?"></textarea>
+                                </div>
+                                <div class="nota-campo">
+                                    <label>Climax</label>
+                                    <textarea class="nota-textarea" id="cuento-climax" placeholder="El punto mas alto"></textarea>
+                                </div>
+                                <div class="nota-campo">
+                                    <label>Desenlace</label>
+                                    <textarea class="nota-textarea" id="cuento-desenlace" placeholder="¿Como se resuelve?"></textarea>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- NOVELA -->
+                <div class="taller-panel" data-panel="novela">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="novela-titulo" placeholder="Titulo de la novela" spellcheck="true">
+                        <div class="novela-layout">
+                            <aside class="novela-sidebar">
+                                <div class="sidebar-header">
+                                    <span>Capitulos</span>
+                                    <button class="btn-icono" id="novela-nuevo-cap" title="Nuevo capitulo">+</button>
+                                </div>
+                                <ul class="capitulos-lista" id="capitulos-lista"></ul>
+                                <div class="novela-meta">
+                                    <div class="novela-stat">
+                                        <span class="nv-valor" id="novela-total-palabras">0</span>
+                                        <span class="nv-label">Palabras totales</span>
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="novela-main">
+                                <input type="text" class="cap-titulo-input" id="novela-cap-titulo" placeholder="Titulo del capitulo" spellcheck="true">
+                                <textarea class="lienzo" id="novela-cap-texto" placeholder="Escribe el capitulo..." spellcheck="true" lang="es"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HISTORIA -->
+                <div class="taller-panel" data-panel="historia">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="historia-titulo" placeholder="Titulo de la historia" spellcheck="true">
+                        <div class="historia-hint-imagenes">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                            Pega (Ctrl+V), arrastra una imagen, o
+                            <label for="input-imagen" style="color:var(--accent);cursor:pointer;text-decoration:underline;">elige un archivo</label>
+                            <input type="file" id="input-imagen" accept="image/*" style="display:none;">
+                        </div>
+                        <div class="historia-editor" id="historia-editor" contenteditable="true" spellcheck="true" lang="es" data-placeholder="Escribe tu historia. Inserta imagenes donde quieras acompanar el texto."></div>
+                    </div>
+                </div>
+
+                <!-- VERSO -->
+                <div class="taller-panel" data-panel="verso">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="verso-titulo" placeholder="Titulo del poema" spellcheck="true">
+                        <textarea class="lienzo lienzo-poetico" id="verso-lienzo" placeholder="Escribe el primer verso..." spellcheck="true" lang="es"></textarea>
+                    </div>
+                </div>
+
+                <!-- VISUAL -->
+                <div class="taller-panel" data-panel="visual">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="visual-titulo" placeholder="Titulo del poema visual" spellcheck="true">
+                        <div class="visual-controles">
+                            <div class="control-grupo">
+                                <label>Tamano</label>
+                                <input type="range" id="vis-tamano" min="10" max="72" value="18">
+                                <span class="control-valor" id="vis-tamano-val">18</span>
+                            </div>
+                            <div class="control-grupo">
+                                <label>Letra</label>
+                                <input type="range" id="vis-letra" min="-3" max="15" value="0">
+                                <span class="control-valor" id="vis-letra-val">0</span>
+                            </div>
+                            <div class="control-grupo">
+                                <label>Tipografia</label>
+                                <select id="vis-fuente">
+                                    <option value="'EB Garamond', serif">Garamond</option>
+                                    <option value="'Instrument Serif', serif">Instrument Serif</option>
+                                    <option value="'Literata', serif">Literata</option>
+                                    <option value="'JetBrains Mono', monospace">Monoespaciada</option>
+                                    <option value="'Inter', sans-serif">Inter</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="visual-wrap">
+                            <textarea class="visual-lienzo" id="visual-lienzo" placeholder="Escribe aqui. Usa espacios para dibujar con palabras." spellcheck="true" lang="es"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIARIO -->
+                <div class="taller-panel" data-panel="diario">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="diario-titulo" placeholder="Titulo del diario" spellcheck="true">
+                        <div class="diario-layout">
+                            <aside class="diario-sidebar">
+                                <div class="sidebar-header">
+                                    <span>Entradas</span>
+                                    <button class="btn-icono" id="diario-nueva-entrada" title="Nueva entrada">+</button>
+                                </div>
+                                <ul class="entradas-lista" id="entradas-lista"></ul>
+                            </aside>
+                            <div class="diario-main">
+                                <div class="diario-cabecera">
+                                    <input type="date" class="diario-fecha" id="diario-fecha">
+                                    <select class="diario-select" id="diario-animo">
+                                        <option value="">Animo...</option>
+                                        <option value="sereno">Sereno</option>
+                                        <option value="alegre">Alegre</option>
+                                        <option value="melancolico">Melancolico</option>
+                                        <option value="ansioso">Ansioso</option>
+                                        <option value="irritado">Irritado</option>
+                                        <option value="inspirado">Inspirado</option>
+                                        <option value="cansado">Cansado</option>
+                                        <option value="enamorado">Enamorado</option>
+                                    </select>
+                                    <select class="diario-select" id="diario-clima">
+                                        <option value="">Clima...</option>
+                                        <option value="soleado">Soleado</option>
+                                        <option value="nublado">Nublado</option>
+                                        <option value="lluvioso">Lluvioso</option>
+                                        <option value="tormenta">Tormenta</option>
+                                        <option value="niebla">Niebla</option>
+                                        <option value="viento">Viento</option>
+                                    </select>
+                                    <input type="text" class="diario-lugar" id="diario-lugar" placeholder="Lugar">
+                                </div>
+                                <input type="text" class="cap-titulo-input" id="diario-entrada-titulo" placeholder="Titulo de la entrada (opcional)" spellcheck="true" style="font-size:22px;">
+                                <textarea class="lienzo" id="diario-entrada-texto" placeholder="¿Que paso hoy?" spellcheck="true" lang="es"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CRONICA -->
+                <div class="taller-panel" data-panel="cronica">
+                    <div class="taller-dos-columnas">
+                        <div class="col-principal">
+                            <div class="taller-wrap">
+                                <input type="text" class="titulo-obra" id="cronica-titulo" placeholder="Titulo de la cronica" spellcheck="true">
+                                <input type="text" class="subtitulo-input" id="cronica-subtitulo" placeholder="Subtitulo" spellcheck="true">
+                                <textarea class="lienzo" id="cronica-lienzo" placeholder="Escribe la cronica..." spellcheck="true" lang="es"></textarea>
+                            </div>
+                        </div>
+                        <aside class="col-notas">
+                            <div class="panel-notas">
+                                <div class="panel-notas-titulo">Notas de campo</div>
+                                <textarea class="nota-textarea" id="cronica-notas" style="min-height:280px;" placeholder="Lo que viste, oiste, oliste..."></textarea>
+                                <div class="panel-notas-titulo" style="margin-top:16px;">Fuentes</div>
+                                <textarea class="nota-textarea" id="cronica-fuentes" style="min-height:120px;" placeholder="A quien consultaste, que leiste..."></textarea>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- AFORISMOS -->
+                <div class="taller-panel" data-panel="aforismos">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="aforismos-titulo" placeholder="Titulo de la coleccion" spellcheck="true">
+                        <div class="aforismos-lista" id="aforismos-lista"></div>
+                        <button class="btn btn-secundario" id="aforismo-nuevo" style="margin-top:var(--e-4);">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Anadir aforismo
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FANZINE -->
+                <div class="taller-panel" data-panel="fanzine">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="fanzine-titulo" placeholder="Titulo del fanzine" spellcheck="true">
+                        <div class="fanzine-controles">
+                            <label>Paginas:
+                                <select id="fanzine-paginas">
+                                    <option value="4">4</option>
+                                    <option value="8" selected>8</option>
+                                    <option value="12">12</option>
+                                    <option value="16">16</option>
+                                    <option value="24">24</option>
+                                </select>
+                            </label>
+                            <span class="mono" id="fanzine-info">A5 doblado desde A4 · 2 hojas</span>
+                        </div>
+                        <div class="fanzine-grid" id="fanzine-grid"></div>
+                    </div>
+                </div>
+
+                <!-- REVISTA -->
+                <div class="taller-panel" data-panel="revista">
+                    <div class="taller-wrap">
+                        <input type="text" class="titulo-obra" id="revista-titulo" placeholder="Titulo de la revista" spellcheck="true">
+                        <input type="text" class="subtitulo-input" id="revista-subtitulo" placeholder="Subtitulo o numero" spellcheck="true">
+                        <div class="revista-layout">
+                            <aside class="revista-sidebar">
+                                <div class="sidebar-header">
+                                    <span>Secciones</span>
+                                    <button class="btn-icono" id="revista-nueva-seccion" title="Nueva seccion">+</button>
+                                </div>
+                                <ul class="secciones-lista" id="secciones-lista"></ul>
+                            </aside>
+                            <div class="revista-main">
+                                <select class="tipo-select" id="revista-seccion-tipo">
+                                    <option value="editorial">Editorial</option>
+                                    <option value="articulo">Articulo</option>
+                                    <option value="resena">Resena</option>
+                                    <option value="entrevista">Entrevista</option>
+                                    <option value="poesia">Poesia</option>
+                                    <option value="narrativa">Narrativa</option>
+                                </select>
+                                <input type="text" class="cap-titulo-input" id="revista-seccion-titulo" placeholder="Titulo de la seccion" spellcheck="true" style="font-size:24px;">
+                                <input type="text" class="autor-input" id="revista-seccion-autor" placeholder="Autor" spellcheck="true">
+                                <textarea class="lienzo" id="revista-seccion-texto" placeholder="Escribe la seccion..." spellcheck="true" lang="es"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="barra-estado">
+                    <span class="estado-punto" id="estado-punto"></span>
+                    <span id="contador-palabras">0 palabras - 0 caracteres</span>
+                    <span style="margin-left:auto;" id="estado-guardado">Sin guardar</span>
+                    <button class="btn btn-secundario" id="guardar-obra" style="margin-left:var(--e-3);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Guardar ahora
+                    </button>
+                </div>
+            </section>
+
+                                    <!-- ========== BIBLIOTECA ========== -->
+            <section class="mundo" id="mundo-biblioteca" style="--mundo-color: #2A3F5F">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo III · Mente maestra</div>
+                    <h1>Biblioteca</h1>
+                    <p class="hero-desc">La mente maestra del programa. Aqui aprendes retorica, linguistica, semiotica, filosofia del lenguaje y ontologia. Flashcards, ejercicios, repeticion espaciada y un camino por niveles: el estudio como forma de escribir mejor.</p>
+                </div>
+
+                <div class="bib-header" id="bib-gam-header"></div>
+
+                <div class="bib-tabs" id="bib-tabs">
+                    <button class="bib-tab activo" data-panel="ruta">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M6 6l6 6-6 6M18 6l-6 6 6 6"/></svg>
+                        Ruta
+                    </button>
+                    <button class="bib-tab" data-panel="explorar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        Explorar
+                    </button>
+                    <button class="bib-tab" data-panel="estudiar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                        Estudiar
+                    </button>
+                    <button class="bib-tab" data-panel="ejercicios">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.2 12.2a6 6 0 0 0-8.5-8.5L5 10.4V19h8.6z"/></svg>
+                        Ejercicios
+                    </button>
+                    <button class="bib-tab" data-panel="lector">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        Lector
+                    </button>
+                    <button class="bib-tab" data-panel="examen">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        Examen
+                    </button>
+                    <button class="bib-tab" data-panel="progreso">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        Progreso
+                    </button>
+                </div>
+
+                <div class="bib-panel activo" id="bib-panel-ruta">
+                    <div id="bib-ruta-niveles" class="ruta-niveles"></div>
+                </div>
+                <div class="bib-panel" id="bib-panel-explorar"></div>
+                <div class="bib-panel" id="bib-panel-estudiar"></div>
+                <div class="bib-panel" id="bib-panel-ejercicios"></div>
+                <div class="bib-panel" id="bib-panel-progreso"></div>
+                <div class="bib-panel" id="bib-panel-examen"></div>
+
+                <div class="bib-panel" id="bib-panel-lector">
+                    <div class="lector-wrap">
+                        <aside class="lector-sidebar">
+                            <div class="pj-sidebar-header" style="padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                                <span style="font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--fg-subtle);font-weight:500;">Textos</span>
+                            </div>
+                            <div class="lector-lista" id="lector-lista"></div>
+                            <button class="btn btn-secundario" id="lector-cargar" style="margin-top:10px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                Cargar archivo
+                            </button>
+                            <button class="btn btn-secundario" id="lector-pegar" style="margin-top:6px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
+                                Pegar texto
+                            </button>
+                        </aside>
+                        <div>
+                            <div class="lector-pagina" id="lector-pagina"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- ========== LABORATORIO ========== -->
+            <section class="mundo" id="mundo-laboratorio" style="--mundo-color: #3D4D2E">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo IV · Analisis</div>
+                    <h1>Laboratorio</h1>
+                    <p class="hero-desc">Aqui los textos se vuelven visibles desde otro angulo. Littera cuenta sus palabras, mide su respiracion, encuentra sus obsesiones, pesa su clima emocional. No para juzgar: para ver. Como un psicologo lee a un paciente, o un biologo mira una celula.</p>
+                </div>
+
+                <div class="lab-barra">
+                    <label for="lab-obra">Obra a analizar</label>
+                    <select class="lab-select" id="lab-obra"></select>
+                    <button class="btn btn-secundario" id="lab-recargar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        Recargar
+                    </button>
+                </div>
+
+                                <div id="lab-resultado" style="margin-top:var(--e-5);"></div>
+
+                <div class="imp-grupo" style="margin-top:var(--e-6);background:var(--bg-alt);">
+                    <div class="imp-grupo-titulo">Comparador de obras</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+                        <div>
+                            <label class="imp-label">Obra A</label>
+                            <select class="imp-select" id="comp-obra-a"></select>
+                        </div>
+                        <div>
+                            <label class="imp-label">Obra B</label>
+                            <select class="imp-select" id="comp-obra-b"></select>
+                        </div>
+                    </div>
+                    <div id="comp-resultado"></div>
+                </div>
+            </section>
+
+                        <!-- ========== IMPRENTA ========== -->
+            <section class="mundo" id="mundo-imprenta" style="--mundo-color: #9A7A1E">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo V · Produccion</div>
+                    <h1>Imprenta</h1>
+                    <p class="hero-desc">Donde el texto se convierte en objeto. Elige una obra, un formato, una tipografia. Littera compone la pagina, arma la portada, anade el colofon y exporta un PDF listo para imprimir en carta, oficio, A4, A3, A2, A5, tabloide o libro.</p>
+                </div>
+
+                <div class="imp-layout">
+                    <aside class="imp-panel">
+
+                        <div class="imp-grupo">
+                            <div class="imp-grupo-titulo">Obra</div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-obra">Selecciona el texto</label>
+                                <select class="imp-select" id="imp-obra"></select>
+                            </div>
+                            <button class="btn btn-secundario" id="imp-recargar" style="width:100%;margin-top:8px;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                                Recargar obras
+                            </button>
+                        </div>
+
+                        <div class="imp-grupo">
+                            <div class="imp-grupo-titulo">Formato</div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-papel">Tamano del papel</label>
+                                <select class="imp-select" id="imp-papel">
+                                    <optgroup label="ISO A">
+                                        <option value="a6">A6 · 105 x 148 mm</option>
+                                        <option value="a5" selected>A5 · 148 x 210 mm</option>
+                                        <option value="a4">A4 · 210 x 297 mm</option>
+                                        <option value="a3">A3 · 297 x 420 mm</option>
+                                        <option value="a2">A2 · 420 x 594 mm</option>
+                                    </optgroup>
+                                    <optgroup label="Americanos">
+                                        <option value="carta">Carta · 216 x 279 mm</option>
+                                        <option value="oficio">Oficio · 216 x 356 mm</option>
+                                        <option value="tabloide">Tabloide · 279 x 432 mm</option>
+                                    </optgroup>
+                                    <optgroup label="Libros">
+                                        <option value="libro-p">Libro pequeno · 110 x 180 mm</option>
+                                        <option value="libro-g">Libro grande · 170 x 240 mm</option>
+                                        <option value="narrativo">Narrativo · 150 x 230 mm</option>
+                                        <option value="revista">Revista · 210 x 280 mm</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-margenes">Margenes</label>
+                                <select class="imp-select" id="imp-margenes">
+                                    <option value="estrechos">Estrechos (maximo texto)</option>
+                                    <option value="normales" selected>Normales (equilibrados)</option>
+                                    <option value="amplios">Amplios (lujo editorial)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="imp-grupo">
+                            <div class="imp-grupo-titulo">Tipografia</div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-tipografia">Familia</label>
+                                <select class="imp-select" id="imp-tipografia">
+                                    <option value="garamond" selected>EB Garamond</option>
+                                    <option value="literata">Literata</option>
+                                    <option value="cormorant">Cormorant Garamond</option>
+                                    <option value="sans">Inter</option>
+                                </select>
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-tamano">Tamano base (pt)</label>
+                                <input type="number" class="imp-input" id="imp-tamano" min="8" max="16" value="11">
+                            </div>
+                        </div>
+
+                        <div class="imp-grupo">
+                            <div class="imp-grupo-titulo">Estructura</div>
+                            <label class="imp-check"><input type="checkbox" id="imp-portada" checked> Portada tipografica</label>
+                            <label class="imp-check"><input type="checkbox" id="imp-creditos" checked> Pagina de creditos</label>
+                            <label class="imp-check"><input type="checkbox" id="imp-colofon" checked> Colofon al final</label>
+                            <label class="imp-check"><input type="checkbox" id="imp-numeracion" checked> Numeracion de paginas</label>
+                            <label class="imp-check"><input type="checkbox" id="imp-encabezados" checked> Encabezados</label>
+                        </div>
+
+                        <div class="imp-grupo">
+                            <div class="imp-grupo-titulo">Datos de la edicion</div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-autor">Autor</label>
+                                <input type="text" class="imp-input" id="imp-autor" value="José Luis Gaete Hernández">
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-titulo-override">Titulo (opcional)</label>
+                                <input type="text" class="imp-input" id="imp-titulo-override" placeholder="Toma el de la obra">
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-subtitulo">Subtitulo</label>
+                                <input type="text" class="imp-input" id="imp-subtitulo" placeholder="Opcional">
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-dedicatoria">Dedicatoria</label>
+                                <input type="text" class="imp-input" id="imp-dedicatoria" placeholder="Para...">
+                            </div>
+                            <div class="imp-campo">
+                                <label class="imp-label" for="imp-editorial">Editorial / sello</label>
+                                <input type="text" class="imp-input" id="imp-editorial" placeholder="Edicion del autor">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primario btn-grande" id="imp-exportar" style="width:100%;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Exportar PDF
+                        </button>
+
+                    </aside>
+
+                    <div class="imp-preview-area">
+                        <div class="imp-toolbar">
+                            <div class="imp-toolbar-info" id="imp-info">
+                                <span style="color:var(--fg-subtle);">Sin obra seleccionada</span>
+                            </div>
+                        </div>
+                        <div class="imp-vista" id="imp-vista"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== ARCHIVO ========== -->
+            <section class="mundo" id="mundo-archivo" style="--mundo-color: #8A5A3A">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo VI</div>
+                    <h1>Archivo</h1>
+                    <p class="hero-desc">Tus obras guardadas. Todo queda en este navegador, sin nube, sin cuentas. Puedes abrir, editar, borrar y exportar cada una.</p>
+                </div>
+                <div class="lista-obras" id="lista-obras"></div>
+            </section>
+
+                        <!-- ========== PLAZA ========== -->
+            <section class="mundo" id="mundo-plaza" style="--mundo-color: #6B4F6E">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo VII · Publicacion</div>
+                    <h1>Plaza</h1>
+                    <p class="hero-desc">Publicar, compartir, colaborar. Aqui registras tus envios a editoriales, revistas y concursos. Guardas contactos. Sigues convocatorias con fecha limite. La Plaza es tu carrera literaria, ordenada.</p>
+                </div>
+
+                <div class="plaza-tabs" id="plaza-tabs">
+                    <button class="plaza-tab activo" data-tab="envios">Envios</button>
+                    <button class="plaza-tab" data-tab="contactos">Editoriales y revistas</button>
+                    <button class="plaza-tab" data-tab="convocatorias">Calendario</button>
+                </div>
+
+                <div class="plaza-panel activo" id="plaza-envios">
+                    <div class="plaza-barra">
+                        <button class="btn btn-primario" onclick="window.LitteraPlaza.nuevoEnvio()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Nuevo envio
+                        </button>
+                    </div>
+                    <div class="envios-lista" id="envios-lista"></div>
+                </div>
+
+                <div class="plaza-panel" id="plaza-contactos">
+                    <div class="plaza-barra">
+                        <button class="btn btn-primario" onclick="window.LitteraPlaza.nuevoContacto()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Nuevo contacto
+                        </button>
+                    </div>
+                    <div class="contactos-lista" id="contactos-lista"></div>
+                </div>
+
+                <div class="plaza-panel" id="plaza-convocatorias">
+                    <div class="plaza-barra">
+                        <button class="btn btn-primario" onclick="window.LitteraPlaza.nuevaConvocatoria()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Nueva convocatoria
+                        </button>
+                    </div>
+                    <div class="convocatorias-lista" id="convocatorias-lista"></div>
+                </div>
+            </section>
+
+            <!-- ========== RITUAL ========== -->
+            <section class="mundo" id="mundo-ritual" style="--mundo-color: #6E2C3C">
+                <div class="hero">
+                    <div class="hero-kicker">Mundo VIII</div>
+                    <h1>Ritual</h1>
+                    <p class="hero-desc">El acto de escribir como ceremonia. Veinticinco minutos, una frase, silencio. Sin notificaciones, sin metricas, sin juicio.</p>
+                </div>
+                <div class="ritual-panel">
+                    <div class="temporizador" id="temporizador">25:00</div>
+                    <div class="ritual-frase" id="ritual-frase"></div>
+                    <div class="ritual-botones">
+                        <button class="btn btn-primario" id="ritual-iniciar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            Iniciar
+                        </button>
+                        <button class="btn btn-secundario" id="ritual-pausar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            Pausar
+                        </button>
+                        <button class="btn btn-secundario" id="ritual-reiniciar">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                            Reiniciar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<div class="toast-container" id="toasts"></div>
+
+<button class="fab-guardar" id="fab-guardar" title="Guardar (Ctrl+S)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+</button>
+
+<script src="js/contenido.js"></script>
+<script src="js/aprendizaje.js"></script>
+<script src="js/taller.js"></script>
+<script src="js/imprenta.js"></script>
+<script src="js/contenido-plus.js"></script>
+<script src="js/gamificacion.js"></script>
+<script src="js/aprendizaje-plus.js"></script>
+<script src="js/plaza.js"></script>
+<script src="js/personajes.js"></script>
+<script src="js/timeline.js"></script>
+<script src="js/lector.js"></script>
+<script src="js/novela-extra.js"></script>
+<script src="js/laboratorio.js"></script>
+<script src="js/imprenta-fanzine.js"></script>
+<script src="assets/portadas/manifest.js"></script>
+<script src="js/portadas.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+

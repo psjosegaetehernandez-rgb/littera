@@ -1,0 +1,307 @@
+﻿/* ============================================
+   LITTERA v5.1 - Paneles extra en Novela
+   Personajes + Timeline vinculados a la obra
+   ============================================ */
+
+.nv-paneles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e-3);
+    margin-top: var(--e-5);
+    padding-top: var(--e-5);
+    border-top: 1px solid var(--border);
+}
+
+.nv-panel {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    padding: var(--e-3);
+}
+
+.nv-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--e-2);
+    margin-bottom: var(--e-3);
+    border-bottom: 1px solid var(--border);
+}
+
+.nv-panel-titulo {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+}
+
+.nv-panel-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.nv-item {
+    padding: 8px 10px;
+    border-radius: var(--r-s);
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all var(--t-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.nv-item:hover {
+    background: var(--bg-card);
+    color: var(--fg-strong);
+}
+
+.nv-item .nv-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--tinta-1) 100%);
+    color: #fff;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding-bottom: 2px;
+}
+
+.nv-item .nv-titulo {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 13.5px;
+    letter-spacing: -0.005em;
+}
+
+.nv-item .nv-meta {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.nv-panel-vacio {
+    padding: var(--e-3);
+    text-align: center;
+    color: var(--fg-subtle);
+    font-style: italic;
+    font-size: 12px;
+    font-family: var(--f-titulo);
+}
+
+.nv-evento-fecha {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 7px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .nv-paneles { grid-template-columns: 1fr; }
+}
+
+/* ---------- Modo Examen ---------- */
+.examen-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.examen-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--e-4);
+    padding: var(--e-4) var(--e-5);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs);
+    margin-bottom: var(--e-5);
+    flex-wrap: wrap;
+}
+
+.examen-progreso {
+    flex: 1;
+    height: 6px;
+    background: var(--bg-sunken);
+    border-radius: 999px;
+    overflow: hidden;
+    min-width: 180px;
+}
+.examen-progreso .ep-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #B8860B 0%, #D4A24C 100%);
+    border-radius: 999px;
+    transition: width var(--t-med);
+}
+
+.examen-contador {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--fg-muted);
+    letter-spacing: 0.05em;
+}
+
+.examen-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-xl);
+    padding: var(--e-7);
+    box-shadow: var(--sombra-l);
+}
+
+.examen-pregunta {
+    font-family: var(--f-titulo);
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--fg-strong);
+    letter-spacing: -0.015em;
+    margin-bottom: var(--e-6);
+}
+
+.examen-opciones {
+    display: grid;
+    gap: var(--e-2);
+}
+
+.examen-opcion {
+    padding: 14px 18px;
+    border-radius: var(--r-m);
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 14.5px;
+    cursor: pointer;
+    transition: all var(--t-fast);
+    text-align: left;
+    font-family: var(--f-cuerpo);
+    display: flex;
+    align-items: center;
+    gap: var(--e-3);
+    width: 100%;
+}
+.examen-opcion .op-letra {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-sunken);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--fg-muted);
+    flex-shrink: 0;
+}
+.examen-opcion:hover { border-color: var(--accent); background: var(--bg-card); }
+.examen-opcion.seleccionada {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+}
+.examen-opcion.seleccionada .op-letra {
+    background: var(--accent);
+    color: #fff;
+}
+
+.examen-pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--e-3);
+    margin-top: var(--e-5);
+    padding-top: var(--e-4);
+    border-top: 1px solid var(--border);
+}
+
+.examen-resultado {
+    text-align: center;
+    padding: var(--e-8) var(--e-5);
+}
+.examen-puntaje {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 96px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--fg-strong);
+    font-weight: 400;
+    margin-bottom: var(--e-3);
+}
+.examen-puntaje small {
+    font-size: 0.35em;
+    color: var(--fg-muted);
+    font-style: normal;
+    font-family: var(--f-mono);
+    letter-spacing: 0.05em;
+}
+.examen-mensaje {
+    font-family: var(--f-cuerpo);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--fg-muted);
+    line-height: 1.6;
+    max-width: 44ch;
+    margin: 0 auto var(--e-6);
+}
+.examen-revision {
+    text-align: left;
+    background: var(--bg-alt);
+    border-radius: var(--r-m);
+    padding: var(--e-4);
+    margin-bottom: var(--e-5);
+    max-height: 320px;
+    overflow-y: auto;
+}
+.examen-revision-item {
+    padding: var(--e-3) 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.55;
+}
+.examen-revision-item:last-child { border-bottom: none; }
+.examen-revision-item .ri-pregunta {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    color: var(--fg-strong);
+    margin-bottom: 6px;
+}
+.examen-revision-item .ri-tu {
+    color: var(--c-taller);
+    font-size: 12.5px;
+}
+.examen-revision-item .ri-correcta {
+    color: var(--c-laboratorio);
+    font-size: 12.5px;
+}
+.examen-revision-item.ok .ri-tu { color: var(--c-laboratorio); }
+
+/* Botones de mazo */
+.mazo-botones {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+}

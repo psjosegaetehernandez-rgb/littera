@@ -1,0 +1,107 @@
+﻿/* Plaza - envios, editoriales, concursos, calendario */
+.plaza-tabs {
+    display: flex; gap: 2px; padding: 3px;
+    background: var(--bg-sunken); border: 1px solid var(--border);
+    border-radius: var(--r-m); margin-bottom: var(--e-5);
+    overflow-x: auto;
+}
+.plaza-tab {
+    padding: 9px 16px; font-size: 13px; font-weight: 500;
+    border-radius: 4px; border: none; background: transparent;
+    color: var(--fg-muted); cursor: pointer; transition: all var(--t-fast);
+    white-space: nowrap; display: inline-flex; gap: 7px; align-items: center;
+}
+.plaza-tab:hover { color: var(--fg-strong); }
+.plaza-tab.activo {
+    background: var(--bg-card); color: var(--fg-strong);
+    box-shadow: var(--sombra-xs); font-weight: 600;
+}
+.plaza-panel { display: none; }
+.plaza-panel.activo { display: block; animation: aparecer var(--t-med) ease-out; }
+
+.plaza-barra {
+    display: flex; gap: var(--e-2); align-items: center;
+    padding: var(--e-3) var(--e-4); background: var(--bg-card);
+    border: 1px solid var(--border); border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs); margin-bottom: var(--e-4);
+    flex-wrap: wrap;
+}
+.plaza-input, .plaza-select {
+    padding: 8px 12px; border: 1px solid var(--border-strong);
+    border-radius: var(--r-s); background: var(--bg); color: var(--fg);
+    font-size: 13px; outline: none; transition: border-color var(--t-fast);
+    font-family: var(--f-ui);
+}
+.plaza-input:focus, .plaza-select:focus { border-color: var(--accent); }
+
+.envios-lista, .contactos-lista, .convocatorias-lista {
+    display: flex; flex-direction: column; gap: var(--e-2);
+}
+
+.envio-item, .contacto-item, .convocatoria-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: var(--e-4); align-items: center;
+    padding: var(--e-4) var(--e-5);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r-l); box-shadow: var(--sombra-xs);
+    transition: all var(--t-med);
+}
+.envio-item:hover, .contacto-item:hover, .convocatoria-item:hover {
+    box-shadow: var(--sombra-m); transform: translateX(3px);
+    border-color: var(--border-strong);
+}
+
+.envio-estado {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+}
+.envio-estado.enviado { background: #2A3F5F; }
+.envio-estado.revision { background: #9A7A1E; }
+.envio-estado.aceptado { background: #3D4D2E; }
+.envio-estado.rechazado { background: #8B2E2E; }
+.envio-estado.publicado { background: #6B4F6E; }
+
+.envio-titulo, .contacto-titulo, .convocatoria-titulo {
+    font-family: var(--f-titulo); font-size: 17px; font-weight: 500;
+    color: var(--fg-strong); letter-spacing: -0.015em; line-height: 1.2;
+    margin-bottom: 2px;
+}
+.envio-meta, .contacto-meta, .convocatoria-meta {
+    font-family: var(--f-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+}
+.envio-obra {
+    font-family: var(--f-cuerpo); font-style: italic;
+    font-size: 13px; color: var(--fg-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 200px;
+}
+.envio-acciones, .contacto-acciones, .convocatoria-acciones {
+    display: flex; gap: 4px; opacity: 0; transition: opacity var(--t-fast);
+}
+.envio-item:hover .envio-acciones,
+.contacto-item:hover .contacto-acciones,
+.convocatoria-item:hover .convocatoria-acciones { opacity: 1; }
+
+.plaza-btn-mini {
+    width: 30px; height: 30px; border-radius: var(--r-s);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-subtle); cursor: pointer; border: 1px solid transparent;
+    transition: all var(--t-fast); background: transparent;
+}
+.plaza-btn-mini:hover {
+    color: var(--fg-strong); background: var(--bg-hover);
+    border-color: var(--border-strong);
+}
+.plaza-btn-mini.borrar:hover {
+    color: var(--accent); background: var(--accent-soft); border-color: transparent;
+}
+.plaza-btn-mini svg { width: 14px; height: 14px; }
+
+@media (max-width: 700px) {
+    .envio-item, .contacto-item, .convocatoria-item {
+        grid-template-columns: auto 1fr auto;
+    }
+    .envio-obra { display: none; }
+}

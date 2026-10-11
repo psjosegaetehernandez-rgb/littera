@@ -1,0 +1,591 @@
+﻿/* ============================================
+   LITTERA v4.1 - Taller extendido
+   ============================================ */
+
+/* ---------- Selector de modos ---------- */
+.taller-barra {
+    display: flex;
+    align-items: center;
+    gap: var(--e-3);
+    margin-bottom: var(--e-4);
+    padding: var(--e-2) var(--e-2) var(--e-2) var(--e-3);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs);
+    flex-wrap: nowrap;
+}
+
+.modo-tabs-wrap {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+.modo-tabs-wrap::-webkit-scrollbar { height: 4px; }
+.modo-tabs-wrap::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+
+.modo-tabs {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    min-width: max-content;
+    padding: 2px;
+}
+
+.modo-sep {
+    width: 1px;
+    height: 14px;
+    background: var(--border-strong);
+    margin: 0 6px;
+    flex-shrink: 0;
+}
+
+.modo-btn {
+    padding: 7px 12px;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    border-radius: 5px;
+    border: none;
+    background: transparent;
+    color: var(--fg-muted);
+    cursor: pointer;
+    transition: all var(--t-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.modo-btn:hover { color: var(--fg-strong); background: var(--bg-hover); }
+.modo-btn.activo {
+    background: var(--bg-card);
+    color: var(--fg-strong);
+    box-shadow: var(--sombra-xs), inset 0 0 0 1px var(--border-strong);
+    font-weight: 600;
+}
+.modo-btn svg { width: 13px; height: 13px; stroke-width: 1.7; }
+
+.taller-acciones {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+.taller-acciones .btn-icono { width: 30px; height: 30px; }
+.taller-acciones .btn-icono svg { width: 14px; height: 14px; }
+.taller-acciones .btn-icono:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ---------- Paneles del taller ---------- */
+.taller-panel { display: none; }
+.taller-panel.activo { display: block; animation: aparecer var(--t-med) ease-out; }
+
+/* ---------- Dos columnas (cuento, cronica) ---------- */
+.taller-dos-columnas {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--e-4);
+    align-items: start;
+}
+.col-principal { min-width: 0; }
+.col-notas { position: sticky; top: calc(var(--topbar-h) + var(--e-4)); }
+
+.panel-notas {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    padding: var(--e-4);
+    box-shadow: var(--sombra-xs);
+}
+.panel-notas-titulo {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--fg-subtle);
+    margin-bottom: var(--e-3);
+    padding-bottom: var(--e-2);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+}
+.nota-campo { margin-bottom: var(--e-3); }
+.nota-campo:last-child { margin-bottom: 0; }
+.nota-campo label {
+    display: block;
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 5px;
+    letter-spacing: 0.005em;
+}
+.nota-textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-s);
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--f-cuerpo);
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 60px;
+    outline: none;
+    transition: border-color var(--t-fast);
+}
+.nota-textarea:focus { border-color: var(--accent); }
+
+/* ---------- Novela ---------- */
+.novela-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: var(--e-4);
+    min-height: 62vh;
+    margin-top: var(--e-4);
+}
+.novela-sidebar {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    padding: var(--e-3);
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+}
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--e-2);
+    margin-bottom: var(--e-2);
+    border-bottom: 1px solid var(--border);
+}
+.sidebar-header span {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+}
+.sidebar-header .btn-icono {
+    width: 22px; height: 22px;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    color: var(--fg-muted);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    transition: all var(--t-fast);
+}
+.sidebar-header .btn-icono:hover { background: var(--bg-card); color: var(--fg-strong); }
+
+.capitulos-lista, .entradas-lista, .secciones-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.capitulo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: var(--r-s);
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--fg-muted);
+    transition: all var(--t-fast);
+    position: relative;
+}
+.capitulo-item:hover { background: var(--bg-hover); color: var(--fg-strong); }
+.capitulo-item.activo {
+    background: var(--bg-card);
+    color: var(--fg-strong);
+    font-weight: 600;
+    box-shadow: inset 2px 0 0 var(--accent);
+}
+.capitulo-item .cap-num {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--fg-subtle);
+    min-width: 18px;
+}
+.capitulo-item .cap-titulo {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.capitulo-item .cap-acciones { opacity: 0; transition: opacity var(--t-fast); }
+.capitulo-item:hover .cap-acciones { opacity: 1; }
+.capitulo-item .btn-cap-borrar { color: var(--fg-subtle); background: transparent; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; }
+.capitulo-item .btn-cap-borrar:hover { color: var(--accent); }
+
+.novela-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+    min-width: 0;
+}
+.cap-titulo-input {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 28px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: var(--fg-strong);
+    outline: none;
+    padding: 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+.cap-titulo-input::placeholder { color: var(--fg-subtle); opacity: 0.55; }
+
+.novela-meta {
+    padding-top: var(--e-3);
+    margin-top: var(--e-3);
+    border-top: 1px solid var(--border);
+}
+.novela-stat { text-align: center; }
+.novela-stat .nv-valor {
+    display: block;
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--fg-strong);
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 3px;
+}
+.novela-stat .nv-label {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-subtle);
+}
+
+/* ---------- Diario ---------- */
+.diario-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--e-4);
+    min-height: 62vh;
+    margin-top: var(--e-4);
+}
+.diario-sidebar {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    padding: var(--e-3);
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+}
+.diario-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+    min-width: 0;
+}
+.diario-cabecera {
+    display: flex;
+    gap: var(--e-2);
+    flex-wrap: wrap;
+    align-items: center;
+    padding: var(--e-3);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+}
+.diario-fecha, .diario-select, .diario-lugar {
+    padding: 6px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    background: var(--bg-card);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg);
+    outline: none;
+    transition: border-color var(--t-fast);
+}
+.diario-fecha:focus, .diario-select:focus, .diario-lugar:focus { border-color: var(--accent); }
+.diario-lugar { flex: 1; min-width: 120px; }
+
+.entrada-item {
+    padding: 10px 12px;
+    border-radius: var(--r-s);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all var(--t-fast);
+    border-left: 2px solid transparent;
+    padding-left: 10px;
+}
+.entrada-item:hover { background: var(--bg-hover); }
+.entrada-item.activo { background: var(--bg-card); border-left-color: var(--accent); }
+.entrada-fecha {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+.entrada-item.activo .entrada-fecha { color: var(--accent); }
+.entrada-preview {
+    font-family: var(--f-cuerpo);
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+}
+
+/* ---------- Revista ---------- */
+.revista-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--e-4);
+    min-height: 62vh;
+    margin-top: var(--e-4);
+}
+.revista-sidebar {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    padding: var(--e-3);
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+}
+.revista-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+    min-width: 0;
+}
+.seccion-item {
+    padding: 9px 10px;
+    border-radius: var(--r-s);
+    cursor: pointer;
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    transition: all var(--t-fast);
+}
+.seccion-item:hover { background: var(--bg-hover); color: var(--fg-strong); }
+.seccion-item.activo {
+    background: var(--bg-card);
+    color: var(--fg-strong);
+    box-shadow: inset 2px 0 0 var(--accent);
+}
+.seccion-tipo {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 2px;
+}
+.seccion-titulo {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+.tipo-select {
+    padding: 6px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    background: var(--bg-card);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg);
+    align-self: flex-start;
+    outline: none;
+    cursor: pointer;
+}
+.autor-input, .subtitulo-input {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 16px;
+    border: none;
+    background: transparent;
+    color: var(--fg-muted);
+    outline: none;
+    padding: 0;
+    letter-spacing: 0.005em;
+}
+.autor-input::placeholder, .subtitulo-input::placeholder { color: var(--fg-subtle); opacity: 0.55; }
+.subtitulo-input { font-size: 18px; color: var(--fg-muted); margin-bottom: var(--e-3); }
+
+/* ---------- Fanzine ---------- */
+.fanzine-controles {
+    display: flex;
+    align-items: center;
+    gap: var(--e-3);
+    padding: var(--e-3) var(--e-4);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    margin-top: var(--e-4);
+}
+.fanzine-controles label {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.03em;
+}
+.fanzine-controles select {
+    padding: 4px 8px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    background: var(--bg-card);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg);
+    outline: none;
+    cursor: pointer;
+}
+
+.fanzine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--e-4);
+    margin-top: var(--e-4);
+}
+.fanzine-pagina {
+    position: relative;
+    aspect-ratio: 148 / 210;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 2px;
+    padding: var(--e-3);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--sombra-xs);
+    transition: all var(--t-med);
+}
+.fanzine-pagina:hover { box-shadow: var(--sombra-m); border-color: var(--accent); }
+.fanzine-pagina.portada {
+    border: 2px solid var(--accent);
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-alt) 100%);
+}
+.fanzine-pagina .fz-num {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.05em;
+}
+.fanzine-pagina .fz-texto {
+    flex: 1;
+    width: 100%;
+    border: none;
+    background: transparent;
+    resize: none;
+    font-family: var(--f-titulo);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--fg);
+    outline: none;
+    padding-top: 12px;
+}
+.fanzine-pagina.portada .fz-texto {
+    font-family: var(--f-display);
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+    padding-top: 40%;
+}
+
+/* ---------- Aforismos ---------- */
+.aforismos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+    margin-top: var(--e-4);
+    counter-reset: aforismo;
+}
+.aforismo-item {
+    display: flex;
+    gap: var(--e-3);
+    align-items: flex-start;
+    padding: var(--e-3);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    transition: all var(--t-fast);
+}
+.aforismo-item:hover { border-color: var(--border-strong); }
+.aforismo-item:hover .aforismo-borrar { opacity: 0.8; }
+.aforismo-num {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--accent);
+    min-width: 36px;
+    opacity: 0.5;
+    line-height: 1;
+    padding-top: 4px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+}
+.aforismo-texto {
+    flex: 1;
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--fg);
+    border: none;
+    background: transparent;
+    resize: vertical;
+    outline: none;
+    min-height: 40px;
+    letter-spacing: 0.005em;
+}
+.aforismo-texto::placeholder { color: var(--fg-subtle); opacity: 0.55; }
+.aforismo-borrar {
+    width: 24px;
+    height: 24px;
+    opacity: 0.25;
+    cursor: pointer;
+    color: var(--fg-subtle);
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast);
+    border-radius: var(--r-s);
+}
+.aforismo-borrar:hover { opacity: 1 !important; color: var(--accent); background: var(--accent-soft); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .taller-dos-columnas { grid-template-columns: 1fr; }
+    .col-notas { position: static; }
+    .novela-layout, .diario-layout, .revista-layout { grid-template-columns: 1fr; }
+    .novela-sidebar, .diario-sidebar, .revista-sidebar { max-height: 200px; }
+}

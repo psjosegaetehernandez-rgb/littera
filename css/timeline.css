@@ -1,0 +1,71 @@
+﻿/* Timeline */
+.tl-wrap {
+    display: grid; grid-template-columns: 240px 1fr;
+    gap: var(--e-4); align-items: start;
+}
+.tl-sidebar {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r-l); padding: var(--e-3);
+    position: sticky; top: calc(var(--topbar-h) + var(--e-4));
+    box-shadow: var(--sombra-xs);
+}
+.tl-eventos-lista {
+    display: flex; flex-direction: column;
+    gap: var(--e-3); position: relative;
+    padding-left: 30px;
+}
+.tl-eventos-lista::before {
+    content: ""; position: absolute; left: 10px;
+    top: 12px; bottom: 12px; width: 2px;
+    background: linear-gradient(180deg, transparent 0%, var(--border-strong) 15%, var(--border-strong) 85%, transparent 100%);
+}
+.tl-evento {
+    position: relative;
+    padding: var(--e-4) var(--e-5);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r-l); box-shadow: var(--sombra-xs);
+    transition: all var(--t-med);
+}
+.tl-evento:hover { box-shadow: var(--sombra-m); border-color: var(--border-strong); }
+.tl-evento::before {
+    content: ""; position: absolute;
+    left: -29px; top: 22px; width: 14px; height: 14px;
+    border-radius: 50%; background: var(--bg);
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 0 3px var(--bg);
+}
+.tl-evento-datos {
+    display: grid; grid-template-columns: 1fr auto;
+    gap: var(--e-3); align-items: baseline; margin-bottom: 6px;
+}
+.tl-evento-titulo {
+    font-family: var(--f-titulo); font-style: italic;
+    font-size: 19px; font-weight: 500;
+    letter-spacing: -0.015em; color: var(--fg-strong);
+    line-height: 1.2;
+}
+.tl-evento-fecha {
+    font-family: var(--f-mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.05em;
+    padding: 3px 10px; background: var(--accent-soft);
+    border-radius: 999px; font-weight: 600;
+}
+.tl-evento-meta {
+    display: flex; gap: var(--e-3); flex-wrap: wrap;
+    font-family: var(--f-mono); font-size: 10.5px;
+    color: var(--fg-subtle); letter-spacing: 0.04em;
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+.tl-evento-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.tl-evento-meta strong { color: var(--fg-muted); font-weight: 500; }
+
+.tl-controles {
+    display: flex; gap: var(--e-2); margin-bottom: var(--e-4);
+    flex-wrap: wrap; align-items: center;
+}
+.tl-controles .btn { font-size: 12px; }
+.tl-vacio {
+    text-align: center; padding: var(--e-9) var(--e-5);
+    color: var(--fg-subtle);
+}

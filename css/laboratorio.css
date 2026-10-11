@@ -1,0 +1,498 @@
+﻿/* ============================================
+   LITTERA v4.3 - Laboratorio
+   Analisis textual, estilometria, ritmo
+   ============================================ */
+
+.lab-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-6);
+}
+
+/* ---------- Barra superior ---------- */
+.lab-barra {
+    display: flex;
+    align-items: center;
+    gap: var(--e-3);
+    padding: var(--e-3) var(--e-4);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs);
+    flex-wrap: wrap;
+}
+
+.lab-barra label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+}
+
+.lab-select {
+    padding: 7px 11px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 13px;
+    font-family: var(--f-ui);
+    min-width: 240px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color var(--t-fast);
+}
+.lab-select:focus { border-color: var(--accent); }
+
+.lab-info-obra {
+    margin-left: auto;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: var(--e-3);
+    align-items: center;
+}
+.lab-info-obra .sep { color: var(--fg-subtle); opacity: 0.4; }
+
+/* ---------- Estado vacio ---------- */
+.lab-vacio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--e-4);
+    padding: var(--e-9) var(--e-5);
+    text-align: center;
+    border: 1px dashed var(--border-strong);
+    border-radius: var(--r-xl);
+    background: linear-gradient(180deg, transparent 0%, var(--bg-alt) 100%);
+}
+.lab-vacio svg {
+    width: 64px;
+    height: 64px;
+    color: var(--accent);
+    opacity: 0.4;
+    stroke-width: 1.3;
+}
+.lab-vacio .lv-titulo {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--fg-strong);
+    letter-spacing: -0.02em;
+}
+.lab-vacio .lv-desc {
+    font-size: 14px;
+    color: var(--fg-muted);
+    max-width: 48ch;
+    line-height: 1.6;
+}
+
+/* ---------- Fila de stat cards ---------- */
+.lab-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: var(--e-3);
+}
+
+.lab-stat {
+    padding: var(--e-4) var(--e-4) var(--e-4);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    box-shadow: var(--sombra-xs);
+    position: relative;
+    overflow: hidden;
+}
+.lab-stat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--stat-color, var(--accent));
+}
+
+.lab-stat .ls-valor {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--fg-strong);
+    font-weight: 400;
+    margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+}
+
+.lab-stat .ls-label {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+}
+
+.lab-stat .ls-desc {
+    font-size: 11.5px;
+    color: var(--fg-muted);
+    margin-top: 8px;
+    line-height: 1.45;
+    font-family: var(--f-cuerpo);
+    font-style: italic;
+}
+
+/* ---------- Bloque de analisis ---------- */
+.lab-bloque {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    padding: var(--e-5);
+    box-shadow: var(--sombra-xs);
+}
+
+.lab-bloque-titulo {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--e-3);
+    margin-bottom: var(--e-4);
+    padding-bottom: var(--e-3);
+    border-bottom: 1px solid var(--border);
+}
+
+.lab-bloque-titulo h3 {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: -0.015em;
+    color: var(--fg-strong);
+}
+
+.lab-bloque-titulo .lb-desc {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.06em;
+}
+
+/* ---------- Barra horizontal (top palabras) ---------- */
+.barra-h {
+    display: grid;
+    grid-template-columns: 130px 1fr 60px;
+    gap: var(--e-3);
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+}
+.barra-h:last-child { border-bottom: none; }
+
+.barra-h .bh-palabra {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    letter-spacing: 0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.barra-h .bh-track {
+    height: 6px;
+    background: var(--bg-sunken);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.barra-h .bh-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width var(--t-slow);
+}
+
+.barra-h .bh-cuenta {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    text-align: right;
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Histograma ---------- */
+.histograma {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 130px;
+    padding: var(--e-3) 0;
+    border-bottom: 1px solid var(--border-strong);
+    position: relative;
+}
+
+.hist-bar {
+    flex: 1;
+    background: var(--accent);
+    border-radius: 2px 2px 0 0;
+    opacity: 0.75;
+    transition: all var(--t-med);
+    position: relative;
+    min-height: 2px;
+}
+.hist-bar:hover {
+    opacity: 1;
+    transform: scaleY(1.02);
+    transform-origin: bottom;
+}
+.hist-bar:hover::after {
+    content: attr(data-info);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--tinta-0);
+    color: var(--papel-0);
+    font-family: var(--f-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hist-eje {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 6px;
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Lista de frases repetidas ---------- */
+.frases-repetidas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-2);
+}
+.frase-item {
+    display: flex;
+    align-items: center;
+    gap: var(--e-3);
+    padding: var(--e-3) var(--e-4);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    letter-spacing: 0.005em;
+    line-height: 1.5;
+}
+.frase-item .fi-cuenta {
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 10px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    flex-shrink: 0;
+    letter-spacing: 0.04em;
+}
+
+/* ---------- Palabras firma (tags) ---------- */
+.palabras-firma {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.firma-tag {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 13px;
+    padding: 5px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    color: var(--fg);
+    letter-spacing: 0.005em;
+    transition: all var(--t-fast);
+    cursor: default;
+}
+.firma-tag:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+.firma-tag .ft-cuenta {
+    font-family: var(--f-mono);
+    font-style: normal;
+    font-size: 10px;
+    color: var(--fg-subtle);
+    margin-left: 5px;
+    letter-spacing: 0.03em;
+}
+.firma-tag:hover .ft-cuenta { color: var(--accent); }
+
+/* ---------- Grid dos columnas para bloques ---------- */
+.lab-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--e-4);
+}
+@media (max-width: 900px) {
+    .lab-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ---------- Legibilidad (medidor) ---------- */
+.legibilidad-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+}
+
+.legibilidad-barra {
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        #8B2E2E 0%,
+        #C66B4A 25%,
+        #D4A24C 50%,
+        #7A8B5C 75%,
+        #3D4D2E 100%);
+    position: relative;
+    overflow: visible;
+}
+
+.legibilidad-marcador {
+    position: absolute;
+    top: -5px;
+    width: 4px;
+    height: 18px;
+    background: var(--tinta-0);
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: translateX(-50%);
+    transition: left var(--t-slow);
+}
+
+.legibilidad-escala {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--fg-subtle);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.legibilidad-veredicto {
+    font-family: var(--f-cuerpo);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+    font-style: italic;
+}
+
+/* ---------- Marcadores emocionales ---------- */
+.emocion-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-2);
+}
+.emocion-fila {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--e-3);
+    padding: var(--e-3) 0;
+    border-bottom: 1px solid var(--border);
+}
+.emocion-fila:last-child { border-bottom: none; }
+.emocion-nombre {
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg);
+    letter-spacing: 0.005em;
+}
+.emocion-valor {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+}
+.emocion-barra {
+    flex: 1;
+    max-width: 120px;
+    height: 5px;
+    background: var(--bg-sunken);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-left: auto;
+}
+.emocion-barra .eb-fill {
+    height: 100%;
+    border-radius: 999px;
+}
+
+/* ---------- Puntuacion ---------- */
+.puntuacion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: var(--e-3);
+}
+.puntuacion-item {
+    text-align: center;
+    padding: var(--e-3);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+}
+.puntuacion-signo {
+    font-family: var(--f-titulo);
+    font-size: 26px;
+    line-height: 1;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.puntuacion-cuenta {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+}
+.puntuacion-nombre {
+    font-family: var(--f-mono);
+    font-size: 9px;
+    color: var(--fg-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-top: 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 700px) {
+    .barra-h { grid-template-columns: 100px 1fr 50px; }
+    .lab-info-obra { margin-left: 0; flex-wrap: wrap; }
+    .lab-barra { flex-direction: column; align-items: stretch; }
+    .lab-select { width: 100%; min-width: 0; }
+}

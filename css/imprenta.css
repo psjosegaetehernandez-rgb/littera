@@ -1,0 +1,422 @@
+﻿/* ============================================
+   LITTERA v4.2 - Imprenta
+   ============================================ */
+
+.imp-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--e-5);
+    align-items: start;
+}
+
+/* ---------- Panel izquierdo ---------- */
+.imp-panel {
+    position: sticky;
+    top: calc(var(--topbar-h) + var(--e-4));
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+}
+
+.imp-grupo {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    padding: var(--e-4);
+    box-shadow: var(--sombra-xs);
+}
+
+.imp-grupo-titulo {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--fg-subtle);
+    font-weight: 500;
+    margin-bottom: var(--e-3);
+    padding-bottom: var(--e-2);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.imp-grupo-titulo .badge {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+}
+
+.imp-campo { margin-bottom: var(--e-3); }
+.imp-campo:last-child { margin-bottom: 0; }
+
+.imp-label {
+    display: block;
+    font-family: var(--f-titulo);
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--fg-muted);
+    margin-bottom: 5px;
+    letter-spacing: 0.005em;
+}
+
+.imp-input, .imp-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-s);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 13px;
+    outline: none;
+    transition: border-color var(--t-fast);
+}
+.imp-input:focus, .imp-select:focus { border-color: var(--accent); }
+.imp-select { cursor: pointer; font-family: var(--f-ui); }
+
+.imp-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--fg);
+    user-select: none;
+    transition: color var(--t-fast);
+}
+.imp-check:hover { color: var(--fg-strong); }
+
+.imp-check input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    transition: all var(--t-fast);
+}
+.imp-check input[type="checkbox"]:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.imp-check input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* ---------- Preview area ---------- */
+.imp-preview-area {
+    display: flex;
+    flex-direction: column;
+    gap: var(--e-3);
+    min-width: 0;
+}
+
+.imp-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--e-2);
+    padding: var(--e-2) var(--e-3);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-m);
+    box-shadow: var(--sombra-xs);
+    flex-wrap: wrap;
+}
+
+.imp-toolbar-info {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--fg-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: var(--e-2);
+    flex: 1;
+    min-width: 0;
+}
+.imp-toolbar-info .sep {
+    color: var(--fg-subtle);
+    opacity: 0.5;
+}
+.imp-toolbar-info strong {
+    color: var(--fg-strong);
+    font-weight: 600;
+}
+
+.imp-vista {
+    padding: var(--e-7) var(--e-5);
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    border-radius: var(--r-l);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 640px;
+    overflow: auto;
+    background-image:
+        radial-gradient(circle at 25% 20%, rgba(139, 46, 46, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 75% 80%, rgba(42, 63, 95, 0.02) 0%, transparent 40%);
+}
+
+/* Pagina simulada */
+.imp-pagina {
+    background: #FCFAF4;
+    box-shadow:
+        0 1px 2px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.10),
+        0 20px 48px rgba(0,0,0,0.08);
+    color: #1B1712;
+    transition: all var(--t-med);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+    overflow: hidden;
+    border-radius: 1px;
+}
+
+.imp-pagina.tipo-portada {
+    background:
+        radial-gradient(circle at 30% 20%, rgba(139, 46, 46, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(42, 63, 95, 0.05) 0%, transparent 50%),
+        #FCFAF4;
+}
+
+[data-tema="noche"] .imp-pagina {
+    background: #FCFAF4;
+    color: #1B1815;
+}
+
+/* Contenido interno de la pagina */
+.imp-pagina .pg-interior {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.imp-pagina .pg-linea {
+    margin-bottom: 0.7em;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+.imp-pagina .pg-linea:last-child { margin-bottom: 0; }
+.imp-pagina .pg-linea.sin-sangria { text-indent: 0; }
+.imp-pagina .pg-linea.con-sangria { text-indent: 1.5em; }
+
+.imp-pagina .pg-parrafo-titulo {
+    margin-bottom: 1.5em;
+    text-align: left;
+    text-indent: 0;
+}
+.imp-pagina .pg-parrafo-titulo .pg-cap-num {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #8B2E2E;
+    margin-bottom: 0.6em;
+    font-weight: 500;
+    font-style: normal;
+}
+.imp-pagina .pg-parrafo-titulo .pg-cap-titulo {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.4em;
+    color: #1B1712;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* Pagina de portada */
+.imp-portada-interior {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15% 10%;
+    gap: 1em;
+}
+.imp-portada-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: #8B2E2E;
+    margin-bottom: 0.6em;
+    font-weight: 500;
+}
+.imp-portada-titulo {
+    font-family: 'Instrument Serif', 'EB Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 2.6em;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #0B0907;
+    font-weight: 400;
+    max-width: 14ch;
+    margin: 0 auto;
+}
+.imp-portada-autor {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.72em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #38302A;
+    font-weight: 500;
+    margin-top: 2.5em;
+}
+.imp-portada-ano {
+    position: absolute;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #9A8B78;
+    letter-spacing: 0.2em;
+}
+
+/* Pagina de creditos / colofon */
+.imp-creditos-interior {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15% 12%;
+    text-align: center;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.9em;
+    color: #38302A;
+    line-height: 1.8;
+}
+.imp-creditos-interior .cr-titulo {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 1.5em;
+    color: #0B0907;
+    margin-bottom: 2em;
+    letter-spacing: -0.01em;
+}
+.imp-creditos-interior p { margin-bottom: 0.7em; }
+.imp-creditos-interior .cr-asterisco {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4em;
+    color: #8B2E2E;
+    margin: 2em 0 1em;
+    display: block;
+}
+
+/* Numeracion de pagina */
+.imp-pagina .pg-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.72em;
+    color: #6B5E51;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+.imp-pagina .pg-encabezado {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.7em;
+    font-variant: small-caps;
+    color: #7A736A;
+    letter-spacing: 0.08em;
+    text-align: center;
+}
+
+/* Empty state */
+.imp-vacio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--e-3);
+    padding: var(--e-8) var(--e-5);
+    color: var(--fg-muted);
+    text-align: center;
+    flex: 1;
+}
+.imp-vacio svg {
+    width: 56px;
+    height: 56px;
+    color: var(--accent);
+    opacity: 0.4;
+    stroke-width: 1.3;
+}
+.imp-vacio .imp-vacio-titulo {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--fg-strong);
+    letter-spacing: -0.02em;
+}
+.imp-vacio .imp-vacio-desc {
+    font-size: 13px;
+    max-width: 42ch;
+    line-height: 1.55;
+}
+
+/* Vista de hoja (con marcas de corte) */
+.imp-hoja-wrap {
+    padding: var(--e-6);
+    background: var(--bg-sunken);
+    border-radius: var(--r-l);
+    display: flex;
+    justify-content: center;
+    border: 1px solid var(--border);
+    margin-top: var(--e-4);
+}
+.imp-hoja {
+    position: relative;
+    background: white;
+    box-shadow: var(--sombra-m);
+}
+.imp-hoja-marca {
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background: #000;
+}
+.imp-hoja-marca.top-left { top: -6px; left: -10px; }
+.imp-hoja-marca.top-right { top: -6px; right: -10px; }
+.imp-hoja-marca.bottom-left { bottom: -6px; left: -10px; }
+.imp-hoja-marca.bottom-right { bottom: -6px; right: -10px; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .imp-layout { grid-template-columns: 1fr; }
+    .imp-panel { position: static; }
+}
+
+/* ============================================================
+   PRINT - Reglas para impresion real
+   ============================================================ */
+@media print {
+    body * { visibility: hidden; }
+    .print-root, .print-root * { visibility: visible; }
+    .print-root {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
