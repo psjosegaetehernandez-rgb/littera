@@ -427,19 +427,39 @@
         },
 
         obtenerTextoActivo: function () {
-            var taller = document.querySelector("#mundo-taller.activo");
-            if (taller) {
-                var el = taller.querySelector("textarea.lienzo:not(.oculto), textarea.lienzo-poetico, textarea.visual-lienzo");
-                if (el && el.value && el.value.trim()) return el.value.trim();
-            }
-            var lab = document.querySelector("#mundo-laboratorio.activo");
-            if (lab && window.LitteraLaboratorio && window.LitteraLaboratorio.obraActual) {
-                return this.textoDeObra(window.LitteraLaboratorio.obraActual);
-            }
-            var ta = document.querySelector("textarea");
-            return ta ? ta.value : "";
-        },
+    // 1) Preguntarle a LitteraTaller (sabe segun el modo activo)
+    if (window.LitteraTaller && typeof window.LitteraTaller.textoActual === "function") {
+        try {
+            var t = window.LitteraTaller.textoActual();
+            if (t && t.trim()) return t.trim();
+        } catch (e) { /* sigue */ }
+    }
 
+    // 2) Fallback: buscar solo en el panel activo del taller
+    var panelActivo = document.querySelector(".taller-panel.activo");
+    if (panelActivo) {
+        var els = panelActivo.querySelectorAll("textarea, [contenteditable='true']");
+        for (var i = 0; i < els.length; i++) {
+            var v = els[i].value || els[i].innerText || "";
+            if (v && v.trim()) return v.trim();
+        }
+    }
+
+    // 3) Laboratorio: la obra activa
+    var lab = document.querySelector("#mundo-laboratorio.activo");
+    if (lab && window.LitteraLaboratorio && window.LitteraLaboratorio.obraActual) {
+        return this.textoDeObra(window.LitteraLaboratorio.obraActual);
+    }
+
+    // 4) Ultimo recurso: cualquier textarea visible con contenido
+    var visibles = document.querySelectorAll("textarea");
+    for (var j = 0; j < visibles.length; j++) {
+        var el = visibles[j];
+        if (el.offsetParent !== null && el.value && el.value.trim()) return el.value.trim();
+    }
+
+    return "";
+},
         textoDeObra: function (o) {
             if (!o) return "";
             var partes = [];
@@ -577,4 +597,5 @@
 
     window.LitteraIa = IA;
 })();
+
 
